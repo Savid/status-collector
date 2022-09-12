@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/Savid/status-collector/compare/v1.0.1...v1.0.2) (2022-09-12)
+
+
+### Bug Fixes
+
+* **ci:** node gyp dep ([ab55a75](https://github.com/Savid/status-collector/commit/ab55a757e52a6549f3a5e1fa6761dcc8de3163d9))
+
 ## [1.0.1](https://github.com/Savid/status-collector/compare/v1.0.0...v1.0.1) (2022-09-12)
 
 
