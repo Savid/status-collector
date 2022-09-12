@@ -1,0 +1,80 @@
+{
+  "name": "status-collector",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "author": "Andrew Davis",
+  "scripts": {
+    "build": "rimraf dist/* && tsc",
+    "dev:start": "NODE_ENV=development LOG_LEVEL=debug node --conditions=development --experimental-loader @savid/esbuild-register-loader -r esbuild-register -r dotenv/config src/index.ts",
+    "dev": "nodemon --signal SIGHUP --watch src -e ts --exec npm run dev:start",
+    "lint": "eslint .",
+    "test": "jest --verbose --passWithNoTests"
+  },
+  "dependencies": {
+    "@savid/libp2p-pest": "1.1.0",
+    "@savid/logger": "1.2.0",
+    "@savid/rlpx-pest": "1.2.2",
+    "@savid/shutdown": "1.0.4",
+    "dotenv": "16.0.2",
+    "prom-client": "14.1.0",
+    "sqlite3": "^5.0.11"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "17.1.2",
+    "@commitlint/config-conventional": "17.1.0",
+    "@savid/esbuild-register-loader": "1.0.1",
+    "@savid/eslint": "1.2.0",
+    "@semantic-release/changelog": "6.0.1",
+    "@semantic-release/git": "10.0.1",
+    "@types/jest": "29.0.0",
+    "@types/node": "18.7.16",
+    "@types/sqlite3": "3.1.8",
+    "esbuild": "0.15.7",
+    "esbuild-register": "3.3.3",
+    "jest": "29.0.3",
+    "jest-config": "29.0.3",
+    "jest-mock": "29.0.3",
+    "nodemon": "2.0.19",
+    "semantic-release": "19.0.5",
+    "ts-jest": "29.0.0",
+    "typescript": "4.8.3"
+  },
+  "volta": {
+    "node": "18.9.0",
+    "npm": "8.19.1"
+  },
+  "release": {
+    "branches": [
+      "master"
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog",
+      [
+        "@semantic-release/github",
+        {
+          "successComment": false,
+          "failComment": false,
+          "labels": false,
+          "releasedLabels": false,
+          "failTitle": false
+        }
+      ],
+      "@semantic-release/git"
+    ]
+  },
+  "imports": {
+    "#app/*": {
+      "development": "./src/*.ts",
+      "node": "./dist/*.js"
+    },
+    "#handlers/*": {
+      "development": "./src/handlers/*.ts",
+      "node": "./dist/handlers/*.js"
+    }
+  }
+}
